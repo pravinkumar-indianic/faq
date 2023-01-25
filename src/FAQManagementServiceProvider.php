@@ -106,6 +106,6 @@ class FAQManagementServiceProvider extends ServiceProvider
             'group'        => 'Faq Management'
         ];
 
-        Config::set('nova-permissions.permissions', $existingPermissions);
+        // Config::set('nova-permissions.permissions', $existingPermissions);
     }
 }
