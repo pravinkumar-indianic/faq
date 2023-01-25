@@ -8,6 +8,7 @@ use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Config;
 
 class FAQManagementServiceProvider extends ServiceProvider
 {
@@ -79,6 +80,6 @@ class FAQManagementServiceProvider extends ServiceProvider
             'group'        => 'Faq Management'
         ];
 
-        \Config::set('nova-permissions.permissions', $existingPermissions);
+        Config::set('nova-permissions.permissions', $existingPermissions);
     }
 }
