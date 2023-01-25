@@ -45,7 +45,7 @@ class Faq extends Resource
     {
         return [
             ID::make()->sortable(),
-            BelongsTo::make('Category', 'Category', '\Indianic\FAQManagement\App\Nova\FaqCategory')
+            BelongsTo::make('Category', 'Category', '\Indianic\FAQManagement\Nova\Resources\FaqCategory')
             ->required()
             ->placeholder('Select Category')
             ->sortable(),

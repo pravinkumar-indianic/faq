@@ -3,8 +3,9 @@
 namespace Indianic\FAQManagement;
 
 use Indianic\FAQManagement\Nova\Resources\Faq;
-// use Indianic\FAQManagement\Policies\FaqPolicy;
-// use Indianic\FAQManagement\Policies\FaqCategoryPolicy;
+use Indianic\FAQManagement\Nova\Resources\FaqCategory;
+use Indianic\FAQManagement\Policies\FaqPolicy;
+use Indianic\FAQManagement\Policies\FaqCategoryPolicy;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
@@ -22,8 +23,8 @@ class FAQManagementServiceProvider extends ServiceProvider
     {
         $this->setModulePermissions();
 
-        // Gate::policy(\Indianic\FAQManagement\Models\Faq::class, FaqPolicy::class);
-        // Gate::policy(\Indianic\FAQManagement\Models\FaqCategory::class, FaqCategoryPolicy::class);
+        Gate::policy(\Indianic\FAQManagement\Models\Faq::class, FaqPolicy::class);
+        Gate::policy(\Indianic\FAQManagement\Models\FaqCategory::class, FaqCategoryPolicy::class);
 
         Nova::serving(function (ServingNova $event) {
 
