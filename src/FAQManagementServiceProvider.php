@@ -9,7 +9,7 @@ use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Config;
+// use Illuminate\Support\Facades\Config;
 
 class FAQManagementServiceProvider extends ServiceProvider
 {
