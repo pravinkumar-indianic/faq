@@ -1,0 +1,27 @@
+{
+    "name": "indianic/faq-management",
+    "autoload": {
+        "psr-4": {
+            "Indianic\\FAQManagement\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sanjeev Rajpoot"
+        }
+    ],
+    "require": {
+        "laravel/nova": "^4.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Indianic\\FAQManagement\\FAQManagementServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
+
