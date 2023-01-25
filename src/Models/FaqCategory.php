@@ -1,6 +1,6 @@
 <?php
 
-namespace Indianic\EmailTemplate\Models;
+namespace Indianic\FAQManagement\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

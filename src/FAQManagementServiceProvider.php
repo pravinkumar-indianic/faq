@@ -1,14 +1,15 @@
 <?php
+
 namespace Indianic\FAQManagement;
 
 use Indianic\FAQManagement\Nova\Resources\Faq;
-use Indianic\FAQManagement\Policies\FaqPolicy;
+// use Indianic\FAQManagement\Policies\FaqPolicy;
+// use Indianic\FAQManagement\Policies\FaqCategoryPolicy;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
-use Config;
+use Illuminate\Support\Facades\Config;
 
 class FAQManagementServiceProvider extends ServiceProvider
 {
@@ -21,20 +22,19 @@ class FAQManagementServiceProvider extends ServiceProvider
     {
         $this->setModulePermissions();
 
-        Gate::policy(\Indianic\FAQManagement\Models\Faq::class, FaqPolicy::class);
+        // Gate::policy(\Indianic\FAQManagement\Models\Faq::class, FaqPolicy::class);
+        // Gate::policy(\Indianic\FAQManagement\Models\FaqCategory::class, FaqCategoryPolicy::class);
 
         Nova::serving(function (ServingNova $event) {
 
             Nova::resources([
                 Faq::class,
+                FaqCategory::class,
             ]);
-
         });
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        // listen to all the events through FAQManagementEventListener
-        // Event::listen('*', FAQManagementEventListener::class);
     }
 
     /**
@@ -56,6 +56,32 @@ class FAQManagementServiceProvider extends ServiceProvider
     {
         $existingPermissions = config('nova-permissions.permissions');
 
+        //FAQ category permissions
+        $existingPermissions['view faq-category'] = [
+            'display_name' => 'View faq category',
+            'description'  => 'Can view faq category',
+            'group'        => 'Faq Category'
+        ];
+
+        $existingPermissions['create faq-management'] = [
+            'display_name' => 'Create faq category',
+            'description'  => 'Can create faq category',
+            'group'        => 'Faq Category'
+        ];
+
+        $existingPermissions['update faq-category'] = [
+            'display_name' => 'Update faq category',
+            'description'  => 'Can update faq category',
+            'group'        => 'Faq Category'
+        ];
+
+        $existingPermissions['delete faq-category'] = [
+            'display_name' => 'Delete faq category',
+            'description'  => 'Can delete faq category',
+            'group'        => 'Faq Category'
+        ];
+
+        //FAQ management permissions
         $existingPermissions['view faq-management'] = [
             'display_name' => 'View faq management',
             'description'  => 'Can view faq management',

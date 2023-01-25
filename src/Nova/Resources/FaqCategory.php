@@ -2,13 +2,11 @@
 
 namespace Indianic\FAQManagement\Nova\Resources;
 
-use App\Nova\Resource;
-use Illuminate\Support\Str;
-use Laravel\Nova\Fields\Slug;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class FaqCategory extends Resource
@@ -18,7 +16,7 @@ class FaqCategory extends Resource
      *
      * @var class-string<\Indianic\FAQManagement\Models\FaqCategory>
      */
-    public static string $model = \Indianic\FAQManagement\Models\FaqCategory::class;
+    public static $model = \Indianic\FAQManagement\Models\FaqCategory::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -33,29 +31,16 @@ class FaqCategory extends Resource
      * @var array
      */
     public static $search = [
-        'name',
-        'subject'
+        'id',
     ];
-
-    /**
-     * Return the location to redirect the user after update.
-     *
-     * @param NovaRequest $request
-     * @param  \Laravel\Nova\Resource  $resource
-     * @return string
-     */
-//    public static function redirectAfterUpdate(NovaRequest $request, $resource): string
-//    {
-//        return '/resources/'.static::uriKey();
-//    }
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param NovaRequest $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function fields(NovaRequest $request): array
+    public function fields(NovaRequest $request)
     {
         return [
             ID::make()->sortable(),
@@ -74,80 +59,47 @@ class FaqCategory extends Resource
         ];
     }
 
-    public function fieldsForUpdate(NovaRequest $request): array
-    {
-        return $this->fieldsForCreate($request);
-    }
-
     /**
-     * Get the fields for create form.
+     * Get the cards available for the request.
      *
-     * @param NovaRequest $request
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    public function fieldsForCreate(NovaRequest $request): array
+    public function cards(NovaRequest $request)
     {
-        return [
-            ID::make()->sortable(),
-            BelongsTo::make('Category', 'Category', 'App\Nova\FaqCategory')
-            ->required()
-            ->placeholder('Select Category')
-            ->sortable(),
-            Text::make('Question')
-                ->sortable()
-                ->rules('required', 'max:255'),
-            Trix::make('Answer')
-                ->sortable()
-                ->required(),
-            Select::make('Status')
-                ->options([
-                    1 => 'Active',
-                    0 => 'Inactive',
-                ])
-                ->default(1)
-                ->displayUsingLabels()
-        ];
+        return [];
     }
 
     /**
-     * Find the all events for the dropdown options
+     * Get the filters available for the resource.
      *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
      * @return array
      */
-    private function findEventsInPath(): array
+    public function filters(NovaRequest $request)
     {
-        $files = [];
-        $path = app_path('Events');
-        $iterator = new \RecursiveDirectoryIterator($path);
-
-        foreach (new \RecursiveIteratorIterator($iterator) as $file) {
-            if (!Str::endsWith($file->getRealPath(), '.php')) {
-                continue;
-            }
-
-            $fp = fopen($file->getRealPath(), 'r');
-            $buffer = fread($fp, 512);
-
-            // find the name space
-            preg_match("/namespace (.*)/", $buffer, $matches);
-            $namespace = str_replace(';', '\\', $matches[1]);
-
-            // find the class name
-            preg_match("/class (.*)/", $buffer, $matches);
-            $className = $matches[1];
-
-            $files[$namespace . $className] = $this->getReadableName($className);
-        }
-        return $files;
+        return [];
     }
 
     /**
-     * @param $name
-     * @return string
+     * Get the lenses available for the resource.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return array
      */
-    private function getReadableName($name): string
+    public function lenses(NovaRequest $request)
     {
-        preg_match_all('/((?:^|[A-Z])[a-z]+)/', $name,$matches);
-        return implode(' ', $matches[0]);
+        return [];
+    }
+
+    /**
+     * Get the actions available for the resource.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @return array
+     */
+    public function actions(NovaRequest $request)
+    {
+        return [];
     }
 }
