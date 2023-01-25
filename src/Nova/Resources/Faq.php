@@ -45,16 +45,20 @@ class Faq extends Resource
     {
         return [
             ID::make()->sortable(),
+
             BelongsTo::make('Category', 'Category', '\Indianic\FAQManagement\Nova\Resources\FaqCategory')
             ->required()
             ->placeholder('Select Category')
             ->sortable(),
+
             Text::make('Question')
                 ->sortable()
                 ->rules('required', 'max:255'),
+
             Trix::make('Answer')
                 ->sortable()
                 ->required(),
+                
             Select::make('Status')
                 ->options([
                     1 => 'Active',

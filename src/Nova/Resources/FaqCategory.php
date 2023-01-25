@@ -45,10 +45,12 @@ class FaqCategory extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
             Slug::make('Slug')->from('Name'),
+
             Select::make('Status')
                 ->options([
                     1 => 'Active',
@@ -56,6 +58,7 @@ class FaqCategory extends Resource
                 ])
                 ->default(1)
                 ->displayUsingLabels(),
+                
             HasMany::make('Faqs')
         ];
     }
