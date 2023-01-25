@@ -8,7 +8,7 @@ use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Config;
+use Config;
 
 class FAQManagementServiceProvider extends ServiceProvider
 {
